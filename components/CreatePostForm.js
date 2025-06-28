@@ -1,7 +1,9 @@
-// components/CreatePostForm.js
+import { createPost } from "@/lib/actions";
+
+
 const CreatePostForm = () => {
   return (
-    <form className="w-full max-w-lg">
+    <form action={createPost} className="w-full max-w-lg">
       <div className="flex flex-wrap -mx-3 mb-6">
         <div className="w-full px-3">
           <label className="block uppercase tracking-wide text-gray-400 text-xs font-bold mb-2" htmlFor="title">

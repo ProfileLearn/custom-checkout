@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
     <html lang="es" className="h-full">
       <body className="flex flex-col min-h-full bg-gray-900">
         <Header />
-        <main className="flex-grow">{children}</main>
+        <main className="flex-grow py-8">{children}</main>
         <Footer /> 
       </body>
     </html>

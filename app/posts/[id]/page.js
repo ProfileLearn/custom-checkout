@@ -1,28 +1,30 @@
-import { posts } from '@/lib/data';
+// app/posts/[id]/page.js
+import { getPostById, getPosts } from '@/lib/data';
 import { notFound } from 'next/navigation';
 
-// Parte 1: Sigue siendo esencial para la optimización y para informar a Next.js.
 export async function generateStaticParams() {
+  const posts = await getPosts();
   return posts.map((post) => ({
     id: post.id.toString(),
   }));
 }
 
-// Parte 2: AÑADIMOS ASYNC DE NUEVO. Esta es la clave que faltaba.
 const PostDetailPage = async ({ params }) => {
+  // PASO 1: Resolver el objeto params. ESTA ES LA LÍNEA QUE ARREGLA EL ERROR.
   const resolvedParams = await params;
-  const postId = parseInt(resolvedParams.id, 10);
-  const post = posts.find((p) => p.id === postId);
+
+  // PASO 2: Usar el ID resuelto para llamar a nuestra función de datos asíncrona.
+  const post = await getPostById(resolvedParams.id);
 
   if (!post) {
     notFound();
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center p-12 md:p-24 bg-gray-900 text-white">
-      <div className="w-full max-w-2xl">
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-4">{post.title}</h1>
-        <p className="text-lg text-gray-300">{post.content}</p>
+    <div className="container mx-auto px-4 ">
+      <div className="w-full max-w-2xl mx-auto bg-gray-800">
+        <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-white">{post.title}</h1>
+        <p className="text-lg text-gray-400">{post.content}</p>
       </div>
     </div>
   );
