@@ -1,0 +1,33 @@
+
+[
+  {
+    "name": "name",
+    "label": "Nombre Completo",
+    "component": "input",
+    "type": "text",
+    "placeholder": "Ej: Juan Pérez",
+    "show": true,
+    "required": true
+  },
+  {
+    "name": "email",
+    "label": "Correo Electrónico",
+    "component": "input",
+    "type": "email",
+    "placeholder": "ej: juan.perez@email.com",
+    "show": true,
+    "required": true
+  },
+  {
+    "name": "plan",
+    "label": "Plan Contratado",
+    "component": "select",
+    "show": true,
+    "required": true,
+    "options": [
+      { "value": "basic", "label": "Básico" },
+      { "value": "premium", "label": "Premium" },
+      { "value": "enterprise", "label": "Empresarial" }
+    ]
+  }
+]

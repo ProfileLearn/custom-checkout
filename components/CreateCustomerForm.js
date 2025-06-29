@@ -1,9 +1,9 @@
 // components/CreatePostForm.js
-import { createPost } from '@/lib/actions';
+import { createCustomer } from '@/lib/actions';
 
-const CreatePostForm = ({ fields }) => {
+const CreateCustomerForm = ({ fields }) => {
   return (
-    <form action={createPost} className="w-full max-w-lg">
+    <form action={createCustomer} className="w-full max-w-lg">
       {fields.map((field) =>
         // 1. Renderizado condicional basado en la propiedad 'show'
         field.show && (
@@ -59,11 +59,11 @@ const CreatePostForm = ({ fields }) => {
 
       <div className="flex items-center justify-end">
         <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-          Crear Post
+          Continuar
         </button>
       </div>
     </form>
   );
 };
 
-export default CreatePostForm;
+export default CreateCustomerForm;

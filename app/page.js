@@ -1,20 +1,13 @@
 // app/page.js
-import { getPosts } from "@/lib/data";
-import PostCard from "@/components/PostCard";
-
-const Home = async () => { // <-- 1. Hacer el componente async
-  const posts = await getPosts(); // <-- 2. Usar await
-
+const HomePage = () => {
   return (
-    <div className="container mx-auto px-4">
-      <h1 className="text-5xl font-bold mb-12 text-center">Últimos Posts</h1>
-      <div className="w-full max-w-2xl mx-auto space-y-6">
-        {posts.map((post) => (
-          <PostCard key={post.id} post={post} />
-        ))}
-      </div>
+    <div className="container mx-auto px-4 text-center py-20">
+      <h1 className="text-5xl font-bold">Bienvenido al Gestor de Clientes</h1>
+      <p className="mt-4 text-lg text-gray-300">
+        Utiliza el enlace en la navegación para crear un nuevo cliente.
+      </p>
     </div>
   );
 };
 
-export default Home;
+export default HomePage;
