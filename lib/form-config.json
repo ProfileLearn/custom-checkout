@@ -1,0 +1,31 @@
+[
+  {
+    "name": "title",
+    "label": "Título",
+    "component": "input",
+    "type": "text",
+    "placeholder": "El título de tu post",
+    "show": true,
+    "required": true
+  },
+  {
+    "name": "content",
+    "label": "Contenido",
+    "component": "textarea",
+    "placeholder": "Escribe tu post aquí...",
+    "show": true,
+    "required": true
+  },
+  {
+    "name": "category",
+    "label": "Categoría",
+    "component": "select",
+    "show": true,
+    "required": true,
+    "options": [
+      { "value": "tech", "label": "Tecnología" },
+      { "value": "lifestyle", "label": "Estilo de Vida" },
+      { "value": "tutorials", "label": "Tutoriales" }
+    ]
+  }
+]

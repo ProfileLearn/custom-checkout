@@ -21,10 +21,10 @@ const PostDetailPage = async ({ params }) => {
   }
 
   return (
-    <div className="container mx-auto px-4 ">
-      <div className="w-full max-w-2xl mx-auto bg-gray-800">
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-4 text-white">{post.title}</h1>
-        <p className="text-lg text-gray-400">{post.content}</p>
+    <div className="container mx-auto px-4">
+      <div className="w-full max-w-2xl mx-auto bg-gray-800 p-8 rounded-lg shadow-lg">
+        <h1 className="text-3xl md:text-4xl font-extrabold mb-4 text-white">{post.title}</h1>
+        <p className="text-md text-gray-400">{post.content}</p>
       </div>
     </div>
   );
