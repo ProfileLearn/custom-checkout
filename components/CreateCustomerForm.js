@@ -1,66 +1,105 @@
-// components/CreatePostForm.js
+// components/CreateCustomerForm.js
+'use client';
+
+import { useState, useEffect } from 'react';
 import { createCustomer } from '@/lib/actions';
+import SubmitButton from './SubmitButton';
 
 const CreateCustomerForm = ({ fields }) => {
+  const [formValues, setFormValues] = useState({});
+
+  useEffect(() => {
+    const defaultValues = {};
+    fields.forEach(field => {
+      if (field.defaultValue) {
+        defaultValues[field.name] = field.defaultValue;
+      }
+    });
+    setFormValues(defaultValues);
+  }, [fields]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues(prevValues => ({
+      ...prevValues,
+      [name]: value,
+    }));
+  };
+
   return (
-    <form action={createCustomer} className="w-full max-w-lg">
-      {fields.map((field) =>
-        // 1. Renderizado condicional basado en la propiedad 'show'
-        field.show && (
-          <div key={field.name} className="flex flex-wrap -mx-3 mb-6">
-            <div className="w-full px-3">
-              <label className="block uppercase tracking-wide text-gray-400 text-xs font-bold mb-2" htmlFor={field.name}>
+    <form action={createCustomer} className="w-full max-w-lg bg-background p-8 rounded-lg shadow-md">
+      {fields.map((field) => {
+        let shouldShow = field.show;
+        if (field.showWhen) {
+          const dependentFieldValue = formValues[field.showWhen.field];
+          shouldShow = field.showWhen.is
+            ? field.showWhen.is.includes(dependentFieldValue)
+            : !!dependentFieldValue;
+        }
+
+        return (
+          shouldShow && (
+            <div key={field.name} className="mb-4">
+              <label className="block text-foreground text-sm font-semibold mb-2" htmlFor={field.name}>
                 {field.label}
               </label>
 
               {field.component === 'input' && (
                 <input
-                  className="appearance-none block w-full bg-gray-800 text-gray-200 border border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700 focus:border-blue-500"
+                  className="appearance-none block w-full bg-background text-foreground border border-border-color rounded py-3 px-4 leading-tight focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
                   id={field.name}
                   name={field.name}
                   type={field.type}
                   placeholder={field.placeholder}
-                  required={field.required} // 2. Aplicamos la propiedad 'required'
+                  required={field.required}
+                  value={formValues[field.name] || ''}
+                  onChange={handleChange}
                 />
               )}
 
               {field.component === 'textarea' && (
                 <textarea
-                  className="appearance-none block w-full bg-gray-800 text-gray-200 border border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700 focus:border-blue-500 h-48 resize-none"
+                  className="appearance-none block w-full bg-background text-foreground border border-border-color rounded py-3 px-4 leading-tight focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary h-32 resize-none"
                   id={field.name}
                   name={field.name}
                   placeholder={field.placeholder}
-                  required={field.required} // 2. Aplicamos la propiedad 'required'
+                  required={field.required}
+                  value={formValues[field.name] || ''}
+                  onChange={handleChange}
                 ></textarea>
               )}
 
-              {/* 3. Nuevo bloque para renderizar el componente 'select' */}
               {field.component === 'select' && (
                 <select
-                  className="appearance-none block w-full bg-gray-800 text-gray-200 border border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700 focus:border-blue-500"
+                  className="appearance-none block w-full bg-background text-foreground border border-border-color rounded py-3 px-4 leading-tight focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
                   id={field.name}
                   name={field.name}
                   required={field.required}
-                  defaultValue="" // Para que la opción por defecto esté seleccionada
+                  value={formValues[field.name] || ''}
+                  onChange={handleChange}
                 >
                   <option value="" disabled>Selecciona una opción</option>
-                  {/* Hacemos un bucle sobre el array de opciones del campo */}
-                  {field.options.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
+                  {field.options.map((option) => {
+                    let shouldShowOption = true;
+                    if (option.showWhen) {
+                      const dependentFieldValue = formValues[option.showWhen.field];
+                      shouldShowOption = dependentFieldValue && option.showWhen.is.includes(dependentFieldValue);
+                    }
+                    return shouldShowOption && (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    );
+                  })}
                 </select>
               )}
             </div>
-          </div>
-        )
-      )}
+          )
+        );
+      })}
 
-      <div className="flex items-center justify-end">
-        <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-          Continuar
-        </button>
+      <div className="mt-6">
+        <SubmitButton />
       </div>
     </form>
   );

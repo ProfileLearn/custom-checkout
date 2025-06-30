@@ -1,10 +1,12 @@
+// components/Footer.js
+
 const Footer = () => {
-  const currentYear = new Date().getFullYear(); // Obtenemos el año actual dinámicamente
+  const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-800 text-gray-400 p-4 mt-auto">
+    <footer className="bg-surface text-foreground-light p-4 mt-auto border-t border-border-color">
       <div className="container mx-auto text-center">
-        <p>© {currentYear} Mi Blog con Next.js. Todos los derechos reservados.</p>
+        <p>© {currentYear} Gestor de Clientes. Todos los derechos reservados.</p>
       </div>
     </footer>
   );

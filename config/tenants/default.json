@@ -1,0 +1,160 @@
+[
+  {
+    "name": "name",
+    "label": "Nombre / Razón Social",
+    "component": "input",
+    "type": "text",
+    "placeholder": "Ej: Juan Pérez o Empresa S.A.",
+    "show": true,
+    "required": true
+  },
+  {
+    "name": "email",
+    "label": "Correo Electrónico",
+    "component": "input",
+    "type": "email",
+    "placeholder": "ej: contacto@empresa.com",
+    "show": true,
+    "required": false
+  },
+  {
+    "name": "iva_condition",
+    "label": "Condición ante el IVA",
+    "component": "select",
+    "show": true,
+    "required": true,
+    "options": [
+      { "value": "RI", "label": "Responsable Inscripto" },
+      { "value": "RM", "label": "Responsable Monotributo" },
+      { "value": "EX", "label": "Exento" },
+      { "value": "CF", "label": "Consumidor Final" }
+    ]
+  },
+  {
+    "name": "identification_type",
+    "label": "Tipo de Identificación",
+    "component": "select",
+    "show": true,
+    "required": true,
+    "options": [
+      {
+        "value": "CUIT",
+        "label": "CUIT / CUIL",
+        "showWhen": { "field": "iva_condition", "is": ["RI", "RM", "EX"] }
+      },
+      {
+        "value": "DNI",
+        "label": "DNI",
+        "showWhen": { "field": "iva_condition", "is": ["CF"] }
+      }
+    ]
+  },
+  {
+    "name": "identification",
+    "label": "Número de Identificación",
+    "component": "input",
+    "type": "text",
+    "placeholder": "Ej: 20-12345678-9 o 12345678",
+    "show": true,
+    "required": true,
+    "showWhen": {
+      "field": "identification_type",
+      "is": ["CUIT", "DNI"]
+    }
+  },
+  {
+    "name": "address",
+    "label": "Dirección",
+    "component": "textarea",
+    "placeholder": "Ej: Av. Corrientes 1234, Piso 5, Dpto A",
+    "show": true,
+    "required": false
+  },
+  {
+    "name": "city",
+    "label": "Ciudad",
+    "component": "input",
+    "type": "text",
+    "placeholder": "Ej: Buenos Aires",
+    "show": true,
+    "required": false
+  },
+  {
+    "name": "province",
+    "label": "Provincia",
+    "component": "select",
+    "show": true,
+    "required": false,
+    "options": [
+      { "value": "CABA", "label": "Ciudad Autónoma de Buenos Aires" },
+      { "value": "BA", "label": "Buenos Aires" },
+      { "value": "CA", "label": "Catamarca" },
+      { "value": "CH", "label": "Chaco" },
+      { "value": "CT", "label": "Chubut" },
+      { "value": "CB", "label": "Córdoba" },
+      { "value": "CR", "label": "Corrientes" },
+      { "value": "ER", "label": "Entre Ríos" },
+      { "value": "FO", "label": "Formosa" },
+      { "value": "JY", "label": "Jujuy" },
+      { "value": "LP", "label": "La Pampa" },
+      { "value": "LR", "label": "La Rioja" },
+      { "value": "MZ", "label": "Mendoza" },
+      { "value": "MI", "label": "Misiones" },
+      { "value": "NQ", "label": "Neuquén" },
+      { "value": "RN", "label": "Río Negro" },
+      { "value": "SA", "label": "Salta" },
+      { "value": "SJ", "label": "San Juan" },
+      { "value": "SL", "label": "San Luis" },
+      { "value": "SC", "label": "Santa Cruz" },
+      { "value": "SF", "label": "Santa Fe" },
+      { "value": "SE", "label": "Santiago del Estero" },
+      { "value": "TF", "label": "Tierra del Fuego" },
+      { "value": "TU", "label": "Tucumán" }
+    ]
+  },
+  {
+    "name": "postal_code",
+    "label": "Código Postal",
+    "component": "input",
+    "type": "text",
+    "placeholder": "Ej: 1001",
+    "show": true,
+    "required": false
+  },
+  {
+    "name": "phone_country_code",
+    "label": "Código de País",
+    "component": "input",
+    "type": "tel",
+    "placeholder": "54",
+    "show": true,
+    "required": false,
+    "defaultValue": "54"
+  },
+  {
+    "name": "phone_area_code",
+    "label": "Código de Área",
+    "component": "input",
+    "type": "tel",
+    "placeholder": "Ej: 11 (Buenos Aires)",
+    "show": true,
+    "required": false
+  },
+  {
+    "name": "phone_number",
+    "label": "Número de Teléfono",
+    "component": "input",
+    "type": "tel",
+    "placeholder": "Ej: 12345678",
+    "show": true,
+    "required": false
+  },
+  {
+    "name": "observations",
+    "label": "Observaciones",
+    "component": "textarea",
+    "placeholder": "Notas adicionales sobre el contacto",
+    "show": false,
+    "required": false
+  }
+]
