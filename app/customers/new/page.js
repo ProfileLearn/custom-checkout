@@ -1,11 +1,12 @@
 // app/customers/new/page.js
+
 import CreateCustomerForm from "@/components/CreateCustomerForm";
 import fs from 'fs/promises';
 import path from 'path';
 
 const NewCustomerPage = async ({ searchParams }) => {
   const params = await searchParams;
-  const tenantId = params?.tenant || 'default';
+  const tenantId = params?.tenant || 'default'; // No necesitas 'await' aquí
 
   let filePath = path.join(process.cwd(), 'config', 'tenants', `${tenantId}.json`);
   let fileContent;
@@ -24,7 +25,8 @@ const NewCustomerPage = async ({ searchParams }) => {
     <div className="flex flex-col items-center p-12">
       <h1 className="text-4xl font-bold mb-8">Crear un Nuevo Cliente</h1>
       <p className="text-sm text-foreground-light mb-4">Configuración: {tenantId}</p>
-      <CreateCustomerForm fields={fields} />
+      {/* Pasa el tenantId al formulario */}
+      <CreateCustomerForm fields={fields} tenantId={tenantId} />
     </div>
   );
 };
