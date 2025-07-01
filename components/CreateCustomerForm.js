@@ -26,8 +26,31 @@ const CreateCustomerForm = ({ fields }) => {
     }));
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log('Datos del formulario antes del envío:', formValues);
+    
+    // Verificar campos requeridos
+    const requiredFields = fields.filter(f => f.required);
+    const missingFields = requiredFields.filter(f => !formValues[f.name]);
+    
+    if(missingFields.length > 0) {
+      console.error('Campos requeridos faltantes:', missingFields.map(f => f.name));
+      return;
+    }
+    
+    // Construir FormData a partir de formValues
+    const data = new FormData();
+    for (const key in formValues) {
+      data.append(key, formValues[key]);
+    }
+
+    // Llamar directamente a la Server Action
+    await createCustomer(data);
+  };
+
   return (
-    <form action={createCustomer} className="w-full max-w-lg bg-background p-8 rounded-lg shadow-md">
+    <form onSubmit={handleSubmit} action={createCustomer} className="w-full max-w-lg bg-background p-8 rounded-lg shadow-md">
       {fields.map((field) => {
         let shouldShow = field.show;
         if (field.showWhen) {
