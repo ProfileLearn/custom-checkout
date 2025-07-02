@@ -3,6 +3,7 @@
 
 import { useState, useEffect } from 'react';
 import { createCustomer } from '@/lib/actions';
+import { evaluateCondition } from '@/lib/form-logic';
 import SubmitButton from './SubmitButton';
 
 const CreateCustomerForm = ({ fields }) => {
@@ -26,39 +27,10 @@ const CreateCustomerForm = ({ fields }) => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log('Datos del formulario antes del envío:', formValues);
-    
-    // Verificar campos requeridos
-    const requiredFields = fields.filter(f => f.required);
-    const missingFields = requiredFields.filter(f => !formValues[f.name]);
-    
-    if(missingFields.length > 0) {
-      console.error('Campos requeridos faltantes:', missingFields.map(f => f.name));
-      return;
-    }
-    
-    // Construir FormData a partir de formValues
-    const data = new FormData();
-    for (const key in formValues) {
-      data.append(key, formValues[key]);
-    }
-
-    // Llamar directamente a la Server Action
-    await createCustomer(data);
-  };
-
   return (
-    <form onSubmit={handleSubmit} action={createCustomer} className="w-full max-w-lg bg-background p-8 rounded-lg shadow-md">
+    <form action={createCustomer} className="w-full max-w-lg bg-background p-8 rounded-lg shadow-md">
       {fields.map((field) => {
-        let shouldShow = field.show;
-        if (field.showWhen) {
-          const dependentFieldValue = formValues[field.showWhen.field];
-          shouldShow = field.showWhen.is
-            ? field.showWhen.is.includes(dependentFieldValue)
-            : !!dependentFieldValue;
-        }
+        const shouldShow = evaluateCondition(field.showWhen, formValues);
 
         return (
           shouldShow && (
@@ -103,11 +75,8 @@ const CreateCustomerForm = ({ fields }) => {
                 >
                   <option value="" disabled>Selecciona una opción</option>
                   {field.options.map((option) => {
-                    let shouldShowOption = true;
-                    if (option.showWhen) {
-                      const dependentFieldValue = formValues[option.showWhen.field];
-                      shouldShowOption = dependentFieldValue && option.showWhen.is.includes(dependentFieldValue);
-                    }
+                    const shouldShowOption = evaluateCondition(option.showWhen, formValues);
+
                     return shouldShowOption && (
                       <option key={option.value} value={option.value}>
                         {option.label}

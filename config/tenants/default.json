@@ -1,12 +1,53 @@
 [
   {
-    "name": "name",
-    "label": "Nombre / Razón Social",
+    "name": "person_type",
+    "label": "Tipo de Cliente",
+    "component": "select",
+    "show": true,
+    "required": true,
+    "options": [
+      { "value": "fisica", "label": "Persona Física" },
+      { "value": "juridica", "label": "Persona Jurídica / Empresa" }
+    ]
+  },
+  {
+    "name": "fname",
+    "label": "Nombre",
     "component": "input",
     "type": "text",
-    "placeholder": "Ej: Juan Pérez o Empresa S.A.",
+    "placeholder": "Ej: Juan",
     "show": true,
-    "required": true
+    "required": true,
+    "showWhen": {
+      "field": "person_type",
+      "is": ["fisica"]
+    }
+  },
+  {
+    "name": "lname",
+    "label": "Apellido",
+    "component": "input",
+    "type": "text",
+    "placeholder": "Ej: Pérez",
+    "show": true,
+    "required": true,
+    "showWhen": {
+      "field": "person_type",
+      "is": ["fisica"]
+    }
+  },
+  {
+    "name": "company_name",
+    "label": "Razón Social",
+    "component": "input",
+    "type": "text",
+    "placeholder": "Ej: Mi Empresa S.A.",
+    "show": true,
+    "required": true,
+    "showWhen": {
+      "field": "person_type",
+      "is": ["juridica"]
+    }
   },
   {
     "name": "email",
@@ -24,10 +65,24 @@
     "show": true,
     "required": true,
     "options": [
-      { "value": "RI", "label": "Responsable Inscripto" },
+      {
+        "value": "RI",
+        "label": "Responsable Inscripto",
+        "showWhen": {
+          "field": "person_type",
+          "is": ["juridica"]
+        }
+      },
       { "value": "RM", "label": "Responsable Monotributo" },
       { "value": "EX", "label": "Exento" },
-      { "value": "CF", "label": "Consumidor Final" }
+      {
+        "value": "CF",
+        "label": "Consumidor Final",
+        "showWhen": {
+          "field": "person_type",
+          "is": ["fisica"]
+        }
+      }
     ]
   },
   {
@@ -39,13 +94,27 @@
     "options": [
       {
         "value": "CUIT",
-        "label": "CUIT / CUIL",
-        "showWhen": { "field": "iva_condition", "is": ["RI", "RM", "EX"] }
+        "label": "CUIT",
+        "showWhen": {
+          "field": "person_type",
+          "is": ["fisica, juridica"],
+          "and": {
+            "field": "iva_condition",
+            "is": ["RI", "RM", "EX"]
+          }
+        }
       },
       {
-        "value": "DNI",
-        "label": "DNI",
-        "showWhen": { "field": "iva_condition", "is": ["CF"] }
+        "value": "CUIL",
+        "label": "CUIL",
+        "showWhen": {
+          "field": "person_type",
+          "is": ["fisica"],
+          "and": {
+            "field": "iva_condition",
+            "is": ["CF"]
+          }
+        }
       }
     ]
   },
@@ -59,7 +128,7 @@
     "required": true,
     "showWhen": {
       "field": "identification_type",
-      "is": ["CUIT", "DNI"]
+      "is": ["CUIT", "CUIL", "DNI"]
     }
   },
   {
@@ -147,14 +216,6 @@
     "type": "tel",
     "placeholder": "Ej: 12345678",
     "show": true,
-    "required": false
-  },
-  {
-    "name": "observations",
-    "label": "Observaciones",
-    "component": "textarea",
-    "placeholder": "Notas adicionales sobre el contacto",
-    "show": false,
     "required": false
   }
 ]
