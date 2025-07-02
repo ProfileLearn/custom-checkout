@@ -46,7 +46,7 @@ const CreateCustomerForm = ({ fields }) => {
                   name={field.name}
                   type={field.type}
                   placeholder={field.placeholder}
-                  required={field.required}
+                  required={field.required && shouldShow}
                   value={formValues[field.name] || ''}
                   onChange={handleChange}
                 />
@@ -58,7 +58,7 @@ const CreateCustomerForm = ({ fields }) => {
                   id={field.name}
                   name={field.name}
                   placeholder={field.placeholder}
-                  required={field.required}
+                  required={field.required && shouldShow}
                   value={formValues[field.name] || ''}
                   onChange={handleChange}
                 ></textarea>
@@ -69,7 +69,7 @@ const CreateCustomerForm = ({ fields }) => {
                   className="appearance-none block w-full bg-background text-foreground border border-border-color rounded py-3 px-4 leading-tight focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
                   id={field.name}
                   name={field.name}
-                  required={field.required}
+                  required={field.required && shouldShow}
                   value={formValues[field.name] || ''}
                   onChange={handleChange}
                 >

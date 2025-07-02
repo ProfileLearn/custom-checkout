@@ -11,6 +11,33 @@
     ]
   },
   {
+    "name": "iva_condition",
+    "label": "Condición ante el IVA",
+    "component": "select",
+    "show": true,
+    "required": true,
+    "options": [
+      {
+        "value": "RI",
+        "label": "Responsable Inscripto",
+        "showWhen": {
+          "field": "person_type",
+          "is": ["juridica"]
+        }
+      },
+      { "value": "RM", "label": "Responsable Monotributo" },
+      { "value": "EX", "label": "Exento" },
+      {
+        "value": "CF",
+        "label": "Consumidor Final",
+        "showWhen": {
+          "field": "person_type",
+          "is": ["fisica"]
+        }
+      }
+    ]
+  },
+  {
     "name": "fname",
     "label": "Nombre",
     "component": "input",
@@ -59,33 +86,6 @@
     "required": false
   },
   {
-    "name": "iva_condition",
-    "label": "Condición ante el IVA",
-    "component": "select",
-    "show": true,
-    "required": true,
-    "options": [
-      {
-        "value": "RI",
-        "label": "Responsable Inscripto",
-        "showWhen": {
-          "field": "person_type",
-          "is": ["juridica"]
-        }
-      },
-      { "value": "RM", "label": "Responsable Monotributo" },
-      { "value": "EX", "label": "Exento" },
-      {
-        "value": "CF",
-        "label": "Consumidor Final",
-        "showWhen": {
-          "field": "person_type",
-          "is": ["fisica"]
-        }
-      }
-    ]
-  },
-  {
     "name": "identification_type",
     "label": "Tipo de Identificación",
     "component": "select",
@@ -97,7 +97,7 @@
         "label": "CUIT",
         "showWhen": {
           "field": "person_type",
-          "is": ["fisica, juridica"],
+          "is": ["fisica", "juridica"],
           "and": {
             "field": "iva_condition",
             "is": ["RI", "RM", "EX"]
@@ -123,12 +123,12 @@
     "label": "Número de Identificación",
     "component": "input",
     "type": "text",
-    "placeholder": "Ej: 20-12345678-9 o 12345678",
+    "placeholder": "20123456786",
     "show": true,
     "required": true,
     "showWhen": {
       "field": "identification_type",
-      "is": ["CUIT", "CUIL", "DNI"]
+      "is": ["CUIT", "CUIL"]
     }
   },
   {
