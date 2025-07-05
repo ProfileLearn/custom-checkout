@@ -3,7 +3,6 @@
     "name": "person_type",
     "label": "Tipo de Cliente",
     "component": "select",
-    "show": true,
     "required": true,
     "options": [
       { "value": "fisica", "label": "Persona Física" },
@@ -14,7 +13,6 @@
     "name": "iva_condition",
     "label": "Condición ante el IVA",
     "component": "select",
-    "show": true,
     "required": true,
     "options": [
       {
@@ -43,12 +41,7 @@
     "component": "input",
     "type": "text",
     "placeholder": "Ej: Juan",
-    "show": true,
-    "required": true,
-    "showWhen": {
-      "field": "person_type",
-      "is": ["fisica"]
-    }
+    "requiredWhen": { "person_type": "fisica" }
   },
   {
     "name": "lname",
@@ -56,12 +49,7 @@
     "component": "input",
     "type": "text",
     "placeholder": "Ej: Pérez",
-    "show": true,
-    "required": true,
-    "showWhen": {
-      "field": "person_type",
-      "is": ["fisica"]
-    }
+    "requiredWhen": { "person_type": "fisica" }
   },
   {
     "name": "company_name",
@@ -69,12 +57,7 @@
     "component": "input",
     "type": "text",
     "placeholder": "Ej: Mi Empresa S.A.",
-    "show": true,
-    "required": true,
-    "showWhen": {
-      "field": "person_type",
-      "is": ["juridica"]
-    }
+    "requiredWhen": { "person_type": "juridica" }
   },
   {
     "name": "email",
@@ -89,7 +72,6 @@
     "name": "identification_type",
     "label": "Tipo de Identificación",
     "component": "select",
-    "show": true,
     "required": true,
     "options": [
       {
@@ -124,12 +106,7 @@
     "component": "input",
     "type": "text",
     "placeholder": "20123456786",
-    "show": true,
-    "required": true,
-    "showWhen": {
-      "field": "identification_type",
-      "is": ["CUIT", "CUIL"]
-    }
+    "requiredWhen": { "identification_type": ["CUIT", "CUIL"] }
   },
   {
     "name": "address",
@@ -198,24 +175,27 @@
     "placeholder": "54",
     "show": true,
     "required": false,
-    "defaultValue": "54"
+    "defaultValue": "54",
+    "inline": true
   },
   {
     "name": "phone_area_code",
     "label": "Código de Área",
     "component": "input",
     "type": "tel",
-    "placeholder": "Ej: 11 (Buenos Aires)",
+    "placeholder": "261",
     "show": true,
-    "required": false
+    "required": false,
+    "inline": true
   },
   {
     "name": "phone_number",
     "label": "Número de Teléfono",
     "component": "input",
     "type": "tel",
-    "placeholder": "Ej: 12345678",
+    "placeholder": "12345677",
     "show": true,
-    "required": false
+    "required": false,
+    "inline": true
   }
 ]
