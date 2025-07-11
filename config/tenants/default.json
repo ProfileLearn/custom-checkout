@@ -16,17 +16,17 @@
     "required": true,
     "options": [
       {
-        "value": "RI",
+        "value": "IVA_RESPONSABLE",
         "label": "Responsable Inscripto",
         "showWhen": {
           "field": "person_type",
           "is": ["juridica"]
         }
       },
-      { "value": "RM", "label": "Responsable Monotributo" },
-      { "value": "EX", "label": "Exento" },
+      { "value": "UNIQUE_TRIBUTE_RESPONSABLE", "label": "Responsable Monotributo" },
+      { "value": "IVA_EXEMPT", "label": "Exento" },
       {
-        "value": "CF",
+        "value": "FINAL_CONSUMER",
         "label": "Consumidor Final",
         "showWhen": {
           "field": "person_type",
@@ -82,19 +82,19 @@
           "is": ["fisica", "juridica"],
           "and": {
             "field": "iva_condition",
-            "is": ["RI", "RM", "EX"]
+            "is": ["IVA_RESPONSABLE", "UNIQUE_TRIBUTE_RESPONSABLE", "IVA_EXEMPT"]
           }
         }
       },
       {
-        "value": "CUIL",
-        "label": "CUIL",
+        "value": "DNI",
+        "label": "DNI",
         "showWhen": {
           "field": "person_type",
           "is": ["fisica"],
           "and": {
             "field": "iva_condition",
-            "is": ["CF"]
+            "is": ["FINAL_CONSUMER"]
           }
         }
       }
@@ -104,9 +104,9 @@
     "name": "identification",
     "label": "Número de Identificación",
     "component": "input",
-    "type": "text",
+    "type": "text", 
     "placeholder": "20123456786",
-    "requiredWhen": { "identification_type": ["CUIT", "CUIL"] }
+    "requiredWhen": { "identification_type": ["CUIT", "DNI"] }
   },
   {
     "name": "address",
@@ -132,30 +132,30 @@
     "show": true,
     "required": false,
     "options": [
-      { "value": "CABA", "label": "Ciudad Autónoma de Buenos Aires" },
-      { "value": "BA", "label": "Buenos Aires" },
-      { "value": "CA", "label": "Catamarca" },
-      { "value": "CH", "label": "Chaco" },
-      { "value": "CT", "label": "Chubut" },
-      { "value": "CB", "label": "Córdoba" },
-      { "value": "CR", "label": "Corrientes" },
-      { "value": "ER", "label": "Entre Ríos" },
-      { "value": "FO", "label": "Formosa" },
-      { "value": "JY", "label": "Jujuy" },
-      { "value": "LP", "label": "La Pampa" },
-      { "value": "LR", "label": "La Rioja" },
-      { "value": "MZ", "label": "Mendoza" },
-      { "value": "MI", "label": "Misiones" },
-      { "value": "NQ", "label": "Neuquén" },
-      { "value": "RN", "label": "Río Negro" },
-      { "value": "SA", "label": "Salta" },
-      { "value": "SJ", "label": "San Juan" },
-      { "value": "SL", "label": "San Luis" },
-      { "value": "SC", "label": "Santa Cruz" },
-      { "value": "SF", "label": "Santa Fe" },
-      { "value": "SE", "label": "Santiago del Estero" },
-      { "value": "TF", "label": "Tierra del Fuego" },
-      { "value": "TU", "label": "Tucumán" }
+      { "value": "Ciudad Autónoma de Buenos Aires", "label": "Ciudad Autónoma de Buenos Aires" },
+      { "value": "Buenos Aires", "label": "Buenos Aires" },
+      { "value": "Catamarca", "label": "Catamarca" },
+      { "value": "Chaco", "label": "Chaco" },
+      { "value": "Chubut", "label": "Chubut" },
+      { "value": "Córdoba", "label": "Córdoba" },
+      { "value": "Corrientes", "label": "Corrientes" },
+      { "value": "Entre Ríos", "label": "Entre Ríos" },
+      { "value": "Formosa", "label": "Formosa" },
+      { "value": "Jujuy", "label": "Jujuy" },
+      { "value": "La Pampa", "label": "La Pampa" },
+      { "value": "La Rioja", "label": "La Rioja" },
+      { "value": "Mendoza", "label": "Mendoza" },
+      { "value": "Misiones", "label": "Misiones" },
+      { "value": "Neuquén", "label": "Neuquén" },
+      { "value": "Río Negro", "label": "Río Negro" },
+      { "value": "Salta", "label": "Salta" },
+      { "value": "San Juan", "label": "San Juan" },
+      { "value": "San Luis", "label": "San Luis" },
+      { "value": "Santa Cruz", "label": "Santa Cruz" },
+      { "value": "Santa Fe", "label": "Santa Fe" },
+      { "value": "Santiago del Estero", "label": "Santiago del Estero" },
+      { "value": "Tierra del Fuego", "label": "Tierra del Fuego" },
+      { "value": "Tucumán", "label": "Tucumán" }
     ]
   },
   {
@@ -163,7 +163,7 @@
     "label": "Código Postal",
     "component": "input",
     "type": "text",
-    "placeholder": "Ej: 1001",
+    "placeholder": "1001",
     "show": true,
     "required": false
   },
