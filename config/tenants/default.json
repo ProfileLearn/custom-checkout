@@ -23,7 +23,10 @@
           "is": ["juridica"]
         }
       },
-      { "value": "UNIQUE_TRIBUTE_RESPONSABLE", "label": "Responsable Monotributo" },
+      {
+        "value": "UNIQUE_TRIBUTE_RESPONSABLE",
+        "label": "Responsable Monotributo"
+      },
       { "value": "IVA_EXEMPT", "label": "Exento" },
       {
         "value": "FINAL_CONSUMER",
@@ -82,7 +85,11 @@
           "is": ["fisica", "juridica"],
           "and": {
             "field": "iva_condition",
-            "is": ["IVA_RESPONSABLE", "UNIQUE_TRIBUTE_RESPONSABLE", "IVA_EXEMPT"]
+            "is": [
+              "IVA_RESPONSABLE",
+              "UNIQUE_TRIBUTE_RESPONSABLE",
+              "IVA_EXEMPT"
+            ]
           }
         }
       },
@@ -104,17 +111,27 @@
     "name": "identification",
     "label": "Número de Identificación",
     "component": "input",
-    "type": "text", 
+    "type": "text",
     "placeholder": "20123456786",
     "requiredWhen": { "identification_type": ["CUIT", "DNI"] }
   },
   {
-    "name": "address",
+    "name": "street",
     "label": "Dirección",
-    "component": "textarea",
-    "placeholder": "Ej: Av. Corrientes 1234, Piso 5, Dpto A",
+    "component": "input",
+    "placeholder": "Ej: Av. Corrientes",
     "show": true,
-    "required": false
+    "required": true,
+    "group": "address"
+  },
+  {
+    "name": "number",
+    "label": "Número",
+    "component": "input",
+    "placeholder": "Ej: 1234",
+    "show": true,
+    "required": true,
+    "group": "address"
   },
   {
     "name": "city",
@@ -123,7 +140,8 @@
     "type": "text",
     "placeholder": "Ej: Buenos Aires",
     "show": true,
-    "required": false
+    "required": true,
+    "group": "address"
   },
   {
     "name": "province",
@@ -131,8 +149,12 @@
     "component": "select",
     "show": true,
     "required": false,
+    "group": "address",
     "options": [
-      { "value": "Ciudad Autónoma de Buenos Aires", "label": "Ciudad Autónoma de Buenos Aires" },
+      {
+        "value": "Ciudad Autónoma de Buenos Aires",
+        "label": "Ciudad Autónoma de Buenos Aires"
+      },
       { "value": "Buenos Aires", "label": "Buenos Aires" },
       { "value": "Catamarca", "label": "Catamarca" },
       { "value": "Chaco", "label": "Chaco" },
@@ -159,13 +181,34 @@
     ]
   },
   {
-    "name": "postal_code",
+    "name": "cp",
     "label": "Código Postal",
     "component": "input",
     "type": "text",
     "placeholder": "1001",
     "show": true,
-    "required": false
+    "required": true,
+    "group": "address"
+  },
+  {
+    "name": "door",
+    "label": "Piso y Puerta",
+    "component": "input",
+    "type": "text",
+    "placeholder": "3-B",
+    "show": true,
+    "required": true,
+    "group": "address"
+  },
+  {
+    "name": "comment",
+    "label": "Información Adicional",
+    "component": "input",
+    "type": "text",
+    "placeholder": "Dejar en portería",
+    "show": true,
+    "required": true,
+    "group": "address"
   },
   {
     "name": "phone_country_code",
