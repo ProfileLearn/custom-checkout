@@ -55,7 +55,7 @@
     "requiredWhen": { "person_type": "fisica" }
   },
   {
-    "name": "company_name",
+    "name": "legal_name",
     "label": "Razón Social",
     "component": "input",
     "type": "text",
@@ -222,7 +222,7 @@
     "inline": true
   },
   {
-    "name": "phone_area_code",
+    "name": "area_code",
     "label": "Código de Área",
     "component": "input",
     "type": "tel",
@@ -232,7 +232,7 @@
     "inline": true
   },
   {
-    "name": "phone_number",
+    "name": "phone",
     "label": "Número de Teléfono",
     "component": "input",
     "type": "tel",
